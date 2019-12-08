@@ -18,34 +18,34 @@ with open('d:/42_python/aoc_data\day_2_1.csv') as f:
     aoc_day_2 = [list(map(int, rec)) for rec in csv.reader(f, delimiter=',')][0]
 
 # Ausgabe des Inputs
-# print(aoc_day_2)
-#
-# # Teil 1
-#
-# # initialisiere Zähler
-# i = 0
-#
-# # Die Stelle 1 soll durch 12, die Stelle 2 durch 2 ersetzt werden
-# aoc_output_2 = aoc_day_2
-# aoc_output_2[1] = 12
-# aoc_output_2[2] = 2
-#
-# # Laufe die Liste ab und verarbeite den Input
-# while i <= len(aoc_output_2) - 1:
-#     if aoc_output_2[i] == 1:
-#         aoc_output_2[aoc_output_2[i + 3]] = aoc_output_2[aoc_output_2[i + 1]] + aoc_output_2[aoc_output_2[i + 2]]
-#     elif aoc_output_2[i] == 2:
-#         aoc_output_2[aoc_output_2[i + 3]] = aoc_output_2[aoc_output_2[i + 1]] * aoc_output_2[aoc_output_2[i + 2]]
-#     elif aoc_output_2[i] == 99:
-#         break
-#     else:
-#         print('Fehler in der Verarbeitung: Kein Haltecode wurde getroffen.')
-#         break
-#     i = i + 4
-#
-# print(aoc_output_2[0])
+print(aoc_day_2)
 
-# Teil 2: Welcher Input (d.h. welche Zahlen an Stelle 1 und 2) erzeugt den Output 19690720?
+# Teil 1: Lösung 3516593
+
+# initialisiere Zähler
+i = 0
+
+# Die Stelle 1 soll durch 12, die Stelle 2 durch 2 ersetzt werden
+aoc_output_2 = aoc_day_2.copy()
+aoc_output_2[1] = 12
+aoc_output_2[2] = 2
+
+# Laufe die Liste ab und verarbeite den Input
+while i <= len(aoc_output_2) - 1:
+    if aoc_output_2[i] == 1:
+        aoc_output_2[aoc_output_2[i + 3]] = aoc_output_2[aoc_output_2[i + 1]] + aoc_output_2[aoc_output_2[i + 2]]
+    elif aoc_output_2[i] == 2:
+        aoc_output_2[aoc_output_2[i + 3]] = aoc_output_2[aoc_output_2[i + 1]] * aoc_output_2[aoc_output_2[i + 2]]
+    elif aoc_output_2[i] == 99:
+        break
+    else:
+        print('Fehler in der Verarbeitung: Kein Haltecode wurde getroffen.')
+        break
+    i += 4
+
+print(aoc_output_2[0])
+
+# Teil 2: Welcher Input (d.h. welche Zahlen an Stelle 1 und 2) erzeugt den Output 19690720? 7749
 for k in range(100):
     for j in range(100):
         # print(f"Status: {aoc_output_2[1]}, {aoc_output_2[2]}")

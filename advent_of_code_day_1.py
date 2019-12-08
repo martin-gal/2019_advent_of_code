@@ -18,18 +18,30 @@ print(aoc_day_1)
 #   Lösung 2 mit // Operator
 # aoc_output_1 = [aoc_day_1[i] // 3 - 2 for i in range(0, len(aoc_day_1))]
 
-# Lösung Teil 1
+# Lösung Teil 1: 3249140
 print(sum([aoc_day_1[i] // 3 - 2 for i in range(len(aoc_day_1))]))
+
+print(sum(i // 3 - 2 for i in aoc_day_1)) # etwas eleganter
 
 # Teil 2
 # Das Gewicht des Treibstoffs muss hinzuaddiert werden, so lange dieser positiv ist
-# Lösung Teil 2
+# Lösung Teil 2: 4870838
 fuel = 0
-# Berechne für jedes Modul den Treibstoff-Bedarf, sowie den Treibstoff-Bedarf für den Treibstoff, solange dieser positiv ist
+# Berechne für jedes Modul den Treibstoff-Bedarf, sowie den Treibstoff-Bedarf für den Treibstoff,
+# solange dieser positiv ist
 for i in range(len(aoc_day_1)):
     j = aoc_day_1[i]
     while j > 0:
         j = j // 3 - 2
         fuel = fuel + max(j, 0)
+
+print(fuel)
+
+# etwas eleganter
+fuel = 0
+for i in aoc_day_1:
+    while i > 0:
+        i = i // 3 - 2
+        fuel += max(i, 0)
 
 print(fuel)
