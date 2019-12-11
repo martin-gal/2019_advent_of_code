@@ -63,7 +63,7 @@ def run_opcode(programm, index, eingabe_index, eingabe):
         return programm, (index + 4), ausgabe, eingabe_index, halt
     elif opcode == '03':  # Eingabe schreiben
         programm[programm[(index + 1)]] = eingabe[eingabe_index]
-        return programm, (index + 2), ausgabe, eingabe_index + 1, halt
+        return programm, (index + 2), ausgabe, 1 if eingabe_index == 0 else 1, halt
     elif opcode == '04':  # Ausgabe schreiben
         ausgabe = zugriff(programm, p_1_mode, index + 1)
         # print(f"Ausgabe: {ausgabe}")
@@ -117,56 +117,29 @@ def zugriff(programm, handle, index):
 # Input
 #   programm        Das Programm, das bearbeitet werden soll
 #   eingabe         Die Eingabe-Parameter
+#   startindex      Der Index, der verwendet werden soll
 #   debug_mode      Gibt den aktuellen Durchlauf und den Status des Programms aus, wenn True
 # Output
-# def run_prog(programm, eingabe, debug_mode=False):
-#     # Initialisiere Programm
-#     i = 0                           # Startindex des Programms
-#     eingabe_index = 0               # Erste Eingabe
-#     ausgabe = None                  # Keine Ausgabe
-#     prog = programm.copy()          # Kopie des Programms, die in der Funktion verwendet wird
-#     if debug_mode:                  # Zähler für den Debug-Modus
-#         zaehler = 1
-#     while i < len(prog):
-#         iteration = run_opcode(prog, i, eingabe_index, eingabe)
-#         if iteration[4]:
-#             print('Angehalten')
-#             break
-#         prog = iteration[0]
-#         i = iteration[1]
-#         # if iteration[2] is not None:
-#         #     ausgabe.append(iteration[2])
-#         if iteration[2] is not None:
-#             ausgabe = iteration[2]
-#             return ausgabe
-#         eingabe_index = iteration[3]
-#         if debug_mode:  # Durchlauf, Programmzustand, nächster Index
-#             print(f"{zaehler}:\t {prog} \t {i}")
-#             zaehler += 1
-#     return ausgabe, iteration[4]
-
-def run_prog(programm, eingabe, debug_mode=False):
+#   prog            Das modifizierte Programm
+#   i               Der Index, an dem das Programm gestoppt hat
+#   ausgabe         Der Ausgabewert des OpCode 04
+#   halt            Der Zustand, ob das Programm angehalten hat oder nicht
+def run_prog(programm, eingabe, startindex=0, debug_mode=False):
     # Initialisiere Programm
-    i = 0                           # Startindex des Programms
+    i = startindex                  # Startindex des Programms
     eingabe_index = 0               # Erste Eingabe
-    ausgabe = None                  # Keine Ausgabe
     prog = programm.copy()          # Kopie des Programms, die in der Funktion verwendet wird
     if debug_mode:                  # Zähler für den Debug-Modus
         zaehler = 1
     while i < len(prog):
-        # return programm, index + 4, ausgabe, eingabe_index, halt
         prog, i, ausgabe, eingabe_index, halt = run_opcode(prog, i, eingabe_index, eingabe)
         if halt:
             print('Angehalten') if debug_mode else False
-            return prog, 0, halt
+            return prog, 0, ausgabe, halt
             # break
         if ausgabe is not None:
-            # return ausgabe
-            return prog, ausgabe, halt
+            return prog, i, ausgabe, halt
+            # return prog, ausgabe, halt
         if debug_mode:  # Durchlauf, Programmzustand, nächster Index
             print(f"{zaehler}:\t {prog} \t {i}")
             zaehler += 1
-    # return prog, ausgabe
-
-
-
