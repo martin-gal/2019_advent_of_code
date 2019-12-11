@@ -1,4 +1,4 @@
-# Advent of Code - Day 5
+# Advent of Code - Day 7
 # Teil 1
 import csv
 import itertools  # itertools enthält eine Routine, die Permutationen erstellt
