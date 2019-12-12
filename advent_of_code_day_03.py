@@ -4,7 +4,7 @@
 
 # Daten importieren
 import csv
-with open('d:/42_python/aoc_data\day_3_1.csv') as f:
+with open('d:/42_python/2019_aoc/aoc_data/day_3_1.csv') as f:
     aoc_day_3 = [rec for rec in csv.reader(f, delimiter=',')]
 
 print(aoc_day_3)
