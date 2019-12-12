@@ -103,14 +103,19 @@ def run_opcode(programm, index, eingabe_index, eingabe):
 # zugriff liefert den Wert eines Parameters des OpCodes in Abhängigkeit von dem Switch
 # Input
 #   programm        Das Programm, das gerade bearbeitet wird
-#   handle          Das Kennzeichen, wie der Parameter in dem Index behandelt werden soll (siehe oben)
+#   modus           Das Kennzeichen, wie der Parameter in dem Index behandelt werden soll (siehe oben)
 #   index           Der Index des Parameters
+#   base            Die Basis, die im Modus 2 verwendet wird
 # Output:           Die Funktion gibt den Wert des Parameters zurück
-def zugriff(programm, handle, index):
-    if handle == '0':
+def zugriff(programm, modus, index, base = 0):
+    if modus == '0':
         return programm[programm[index]]
-    else:
+    elif modus == '1':
         return programm[index]
+    elif modus == '2':
+        return programm[base + programm[index]]
+    else:
+        raise Exception(f"Unbekannter Modus: {modus}")
 
 
 # run_prog führt das Programm aus
@@ -143,3 +148,26 @@ def run_prog(programm, eingabe, startindex=0, debug_mode=False):
         if debug_mode:  # Durchlauf, Programmzustand, nächster Index
             print(f"{zaehler}:\t {prog} \t {i}")
             zaehler += 1
+
+
+# get_index
+# Input
+#   programm            Das aktuelle Programm
+#   modus              Der Parameter, der angibt, wie der Wert an der Stelle index verwendet werden soll
+#   index               Der Index, in dem etwas steht
+# Output
+#   wert                Der Index, der angesteuert werden soll
+# def get_index(programm, modus, index, base=0):
+#     if modus == 0:
+#         return programm[index]
+#     elif modus == 1:
+#         return index
+#     elif modus == 2:
+#         return base + programm[index]
+#     else:
+#         raise Exception(f"Unbekannter Modus: {modus}")
+#
+#
+# def get_data(programm, modus, index, base=0):
+#     return programm[get_index(programm, modus, index, base)]
+
