@@ -4,7 +4,7 @@ import itertools  # itertools enthält eine Routine, die Permutationen erstellt
 from intcode_computer_v2 import run_prog
 
 
-with open('d:/42_python/aoc_data/day_9.csv') as f:
+with open('d:/42_python/2019_aoc/aoc_data/day_9.csv') as f:
     aoc_input = [list(map(int, rec)) for rec in csv.reader(f, delimiter=',')][0]
 
 
