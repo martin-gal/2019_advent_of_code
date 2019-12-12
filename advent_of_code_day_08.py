@@ -3,7 +3,7 @@
 # Ein Bild wird geschickt, welches zwei Layer besitzt
 # Jeder Layer hat die Dimention 25 x 6
 
-with open('d:/42_python/aoc_data/day_8.txt') as f:
+with open('d:/42_python/2019_aoc/aoc_data/day_8.txt') as f:
     aoc_input = [i for i in f][0]
 
 
