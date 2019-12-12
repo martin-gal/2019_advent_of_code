@@ -2,7 +2,7 @@
 # Teil 1
 import csv
 
-with open('d:/42_python/aoc_data\day_5.csv') as f:
+with open('d:/42_python/2019_aoc/aoc_data/day_5.csv') as f:
     aoc_input = [list(map(int, rec)) for rec in csv.reader(f, delimiter=',')][0]
 
 print(aoc_input)
