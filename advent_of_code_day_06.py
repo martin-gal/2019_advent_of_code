@@ -4,7 +4,7 @@
 # with open('d:/42_python/aoc_data/day_6.csv') as f:
 #     aoc_input = list(csv.reader(f, delimiter='\n'))
 
-with open('d:/42_python/aoc_data/day_6.csv', 'r', ) as f:
+with open('d:/42_python/2019_aoc/aoc_data/day_6.csv', 'r', ) as f:
     aoc_input = f.read().splitlines()
 
 print(aoc_input)
