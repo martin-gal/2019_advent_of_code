@@ -19,8 +19,8 @@
 class IntCodeComputer:
 
     def __init__(self, programm, eingabe, debug_mode=False):
-        self.prog = programm if programm else print('Fehler, kein Programm wurde geladen.')
-        self.eingabe = eingabe if eingabe else print('Es wurde kein Inputs für das Programm angegeben.')
+        self.prog = programm
+        self.eingabe = eingabe
         self.debug_mode = debug_mode
         self.idx = 0
         self.ausgabe = []
@@ -78,8 +78,6 @@ class IntCodeComputer:
     #                   Parameter: 0
     #                   Beschreibung: Das Programm wird beendet
     def run_opcode(self):
-        # TODO  Die lokalen Variablen ggfs löschen
-        # loc_base, loc_ausgabe, loc_halt = self.base, None, False
         wert = str(self.prog[self.idx]).zfill(5)
         opcode = wert[3:]
         p_1_mode, p_2_mode, p_3_mode = wert[2], wert[1], wert[0]
@@ -98,9 +96,9 @@ class IntCodeComputer:
             self.idx += 4
         elif opcode == '03':  # self.eingabe schreiben
             a = self.get_index(p_1_mode, 1)
-            print(a, len(self.prog))
-            self.prog[a] = self.eingabe[0]
-            self.eingabe.pop(0)
+            self.prog[a] = self.eingabe.pop(0)
+            # self.prog[a] = self.eingabe[0]
+            # self.eingabe.pop(0)
             self.idx += 2
         elif opcode in ['04', '09']:  # Ein Parameter
             a = self.get_data(p_1_mode, 1)
@@ -122,9 +120,6 @@ class IntCodeComputer:
         else:
             # print('Kein gültiger Opcode.')
             raise Exception(f"Unknown opcode: {opcode}")
-        # TODO  Rückgabewerte überarbeiten 
-        #       Sind die Rückgabe-Werte überhaupt noch notwendig?
-        # return self.idx, loc_ausgabe, loc_halt, loc_base
 
     # *get_data*        Liefert den Wert eines Parameters des OpCodes in Abhängigkeit Modus
     # Input
@@ -161,7 +156,23 @@ class IntCodeComputer:
             for _ in range(len(self.prog), idx + 1):
                 self.prog.append(0)
 
+    # *read_output*     Gibt die Ausgabe des IntCodeComputers zurück
     def read_output(self):
         return self.ausgabe
+
+    # *pop_output*      Entfernt das letzte Element der Ausgabe
+    def pop_output(self):
+        self.ausgabe.pop()
+
+    # *write_input*     Schreibt den Wert in die Eingabe
+    def write_input(self, ipt):
+        self.eingabe.append(ipt)
+
+    # *set_value*       Überschreibt einen Wert im Programm
+    def set_value(self, idx, value):
+        try:
+            self.prog[idx] = value
+        except IndexError:
+            print(f"Index {idx} außerhalb des gültigen Bereichs.")
 
 # ******************************************************************************************************************** #
