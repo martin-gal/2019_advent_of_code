@@ -46,7 +46,7 @@ def run_prog(prog, eingabe, startindex=0, debug=False, base=0):
     #                   Beschreibung: Die Eingabe (aus dem Programm-Input) wird an den Ort von p_1 geschrieben
     #       04          Name: Schreibe Ausgabe
     #                   Parameter: 1
-    #                   Beschreibung: Der Wert an dem Ort von p_1 wird ausgegeben
+    #                   Beschreibung: Der Wert an dem Ort von p_1 wird ausgegeben und in die Eingabe geschrieben
     #       05          Name: Springen (wenn wahr)
     #                   Parameter: 2
     #                   Beschreibung: WENN p_1 != 0, DANN springe zu dem Index gegeben durch p_2
@@ -92,6 +92,7 @@ def run_prog(prog, eingabe, startindex=0, debug=False, base=0):
             a = get_data(p_1_mode, idx + 1)
             if opcode == '04':      # Ausgabe schreiben
                 loc_ausgabe = a
+                # eingabe.append(loc_ausgabe)   # Ausgaben werden in die Eingabe-Parameter geschrieben
             elif opcode == '09':    # relative Basis ändern
                 loc_base += a
             idx += 2
@@ -146,6 +147,7 @@ def run_prog(prog, eingabe, startindex=0, debug=False, base=0):
 
     # Initialisiere Programm
     index = startindex  # Startindex des Programms
+    _ausgabe = []
     if debug:  # Zähler für den Debug-Modus
         zaehler = 1
         print(f"0:\t {prog} \t {index}")
@@ -153,10 +155,11 @@ def run_prog(prog, eingabe, startindex=0, debug=False, base=0):
         index, ausgabe, halt, base = run_opcode(index)
         if halt:
             print('Angehalten') if debug else False
-            return prog, index, ausgabe, halt
+            return (prog, index, ausgabe, halt) if debug else eingabe, _ausgabe
             # break
         if ausgabe is not None:
-            print(f"Ausgabe: {ausgabe}")
+            _ausgabe.append(ausgabe)
+            print(f"Ausgabe: {ausgabe}") if debug else False
         if debug:  # Durchlauf, Programmzustand, nächster Index
             print(f"{zaehler}:\t {prog} \t {index}")
             zaehler += 1

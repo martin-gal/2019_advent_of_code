@@ -1,7 +1,7 @@
 # Advent of Code - Day 6
 # import csv
 #
-# with open('d:/42_python/aoc_data/day_6.csv') as f:
+# with open('d:/42_python/2019_aoc/aoc_data/day_6.csv') as f:
 #     aoc_input = list(csv.reader(f, delimiter='\n'))
 
 with open('d:/42_python/2019_aoc/aoc_data/day_6.csv', 'r', ) as f:
