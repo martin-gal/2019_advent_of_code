@@ -1,9 +1,7 @@
-# Advent of Code 2019: Day 14
+# Advent of Code 2019
+# Day 14: Space Stoichiometry ----
 library(tidyverse)
-library(magrittr)
-library(data.table)
-library(lubridate)
-library(glue)
+
 
 test <- read_lines("10 ORE => 10 A
 1 ORE => 1 B
@@ -17,12 +15,19 @@ test <- read_lines("10 ORE => 10 A
 # of ORE required to produce exactly 1 FUEL?
 
 
-incred <- str_extract_all(test, "(?<=\\d{1,2}\\s)\\w{1,4}", simplify = TRUE) %>%
+incred <-
+  test %>%
+  str_extract_all("(?<=\\d{1,2}\\s)\\w{1,4}", simplify = TRUE) %>%
   as.vector() %>%
   unique()
-incred <- incred[incred != '']
+
+incred <- incred[incred != ""]
 
 test %>%
   as.data.frame() %>%
-  separate(., col=`.`, into=c('input', 'output'), sep='=>')
+  separate(., col = ".", into = c("input", "output"), sep = "=>")
 
+
+liste <- list("FUEL" = c("A" = 7, "E" = 1))
+
+incred
